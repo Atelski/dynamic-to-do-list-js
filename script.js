@@ -46,6 +46,14 @@ function saveTaskToLocalStorage(taskText){
     localStorage.setItem('tasks', JSON.stringify(storedTasks));
 }
 
+//Remove task from Local Storage
+function removeTaskFromLocalStorage(taskText) {
+    let storedTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+    storedTasks = storedTasks.filter(task => task !== taskText);
+    localStorage.setItem('tasks', JSON.stringify(storedTasks));
+}
+
+
 //Create Event Listener for adding a task on button click
 addButton.addEventListener('click', () => {
     const taskText = taskInput.value.trim();
@@ -53,7 +61,7 @@ addButton.addEventListener('click', () => {
 });
 
 //Event Listener for adding a task when the enter key is pressed
-taskInput.addEventListener('keyup', (event) => {
+taskInput.addEventListener('keypress', (event) => {
     if (event.key === 'Enter') {
         const taskText = taskInput.value.trim();
         addTask(taskText);
